@@ -1,0 +1,15 @@
+{
+  "name": "pluginagentmarketplace-html",
+  "owner": {
+    "name": "Plugin Agent Marketplace",
+    "email": "pluginagentmarketplace@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "custom-plugin-html",
+      "source": "./",
+      "description": "Claude Code plugin for html development",
+      "version": "1.0.0"
+    }
+  ]
+}

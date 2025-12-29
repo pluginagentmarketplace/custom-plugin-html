@@ -1,0 +1,18 @@
+{
+  "name": "custom-plugin-html",
+  "version": "1.0.0",
+  "description": "HTML mastery plugin",
+  "author": {
+    "name": "Plugin Agent Marketplace"
+  },
+  "agents": [
+    "./agents/html-expert.md"
+  ],
+  "skills": [
+    "./skills/html-basics/SKILL.md",
+    "./skills/semantic-html/SKILL.md",
+    "./skills/forms/SKILL.md",
+    "./skills/accessibility/SKILL.md"
+  ],
+  "license": "SEE LICENSE IN LICENSE"
+}
