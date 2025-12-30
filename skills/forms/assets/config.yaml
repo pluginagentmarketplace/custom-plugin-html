@@ -1,1 +1,386 @@
-elements: [div, span, p, a, img]
+# Forms Skill Configuration
+# Version: 2.0.0 | SASMP: 1.3.0
+
+# HTML5 Input Types
+input_types:
+  text_inputs:
+    - type: text
+      keyboard: text
+      validation: pattern
+      use_case: "Generic single-line text"
+    - type: email
+      keyboard: email
+      validation: built_in
+      use_case: "Email addresses"
+    - type: password
+      keyboard: text
+      validation: pattern
+      use_case: "Passwords (masked)"
+    - type: tel
+      keyboard: tel
+      validation: pattern
+      use_case: "Phone numbers"
+    - type: url
+      keyboard: url
+      validation: built_in
+      use_case: "URLs"
+    - type: search
+      keyboard: search
+      validation: none
+      use_case: "Search queries"
+
+  numeric_inputs:
+    - type: number
+      keyboard: numeric
+      validation: min_max_step
+      use_case: "Numeric values"
+    - type: range
+      keyboard: none
+      validation: min_max_step
+      use_case: "Slider selection"
+
+  date_time_inputs:
+    - type: date
+      keyboard: date
+      validation: min_max
+      use_case: "Date selection"
+    - type: time
+      keyboard: time
+      validation: min_max_step
+      use_case: "Time selection"
+    - type: datetime-local
+      keyboard: datetime
+      validation: min_max
+      use_case: "Date and time"
+    - type: month
+      keyboard: date
+      validation: min_max
+      use_case: "Month/year selection"
+    - type: week
+      keyboard: date
+      validation: min_max
+      use_case: "Week selection"
+
+  special_inputs:
+    - type: color
+      keyboard: none
+      validation: none
+      use_case: "Color picker"
+    - type: file
+      keyboard: none
+      validation: accept
+      use_case: "File upload"
+    - type: hidden
+      keyboard: none
+      validation: none
+      use_case: "Hidden data"
+
+# Validation Attributes
+validation_attributes:
+  required:
+    description: "Field must be filled"
+    applies_to: all
+    example: 'required'
+  pattern:
+    description: "Regex pattern to match"
+    applies_to: [text, password, tel, email, url, search]
+    example: 'pattern="[A-Za-z]{3,}"'
+  minlength:
+    description: "Minimum character count"
+    applies_to: [text, password, textarea]
+    example: 'minlength="8"'
+  maxlength:
+    description: "Maximum character count"
+    applies_to: [text, password, textarea]
+    example: 'maxlength="100"'
+  min:
+    description: "Minimum value"
+    applies_to: [number, range, date, time, datetime-local, month, week]
+    example: 'min="0"'
+  max:
+    description: "Maximum value"
+    applies_to: [number, range, date, time, datetime-local, month, week]
+    example: 'max="100"'
+  step:
+    description: "Value increment"
+    applies_to: [number, range, date, time, datetime-local]
+    example: 'step="0.01"'
+  accept:
+    description: "Accepted file types"
+    applies_to: [file]
+    example: 'accept=".pdf,.doc,.docx"'
+  multiple:
+    description: "Allow multiple values"
+    applies_to: [email, file]
+    example: 'multiple'
+
+# Autocomplete Values
+autocomplete_values:
+  personal:
+    - name             # Full name
+    - given-name       # First name
+    - family-name      # Last name
+    - honorific-prefix # Title (Mr, Mrs, Dr)
+    - honorific-suffix # Suffix (Jr, Sr)
+    - nickname
+    - email
+    - username
+    - new-password
+    - current-password
+    - one-time-code    # OTP/2FA code
+    - organization
+    - organization-title
+    - bday             # Birthday
+    - bday-day
+    - bday-month
+    - bday-year
+    - sex
+    - language
+    - photo            # Photo URL
+
+  contact:
+    - tel              # Full phone
+    - tel-country-code
+    - tel-national
+    - tel-area-code
+    - tel-local
+    - tel-extension
+    - impp             # Instant messaging
+    - url              # Website
+
+  address:
+    - street-address
+    - address-line1
+    - address-line2
+    - address-line3
+    - address-level1   # State/Province
+    - address-level2   # City
+    - address-level3   # District
+    - address-level4   # Neighborhood
+    - country
+    - country-name
+    - postal-code
+
+  payment:
+    - cc-name          # Name on card
+    - cc-given-name
+    - cc-family-name
+    - cc-number        # Card number
+    - cc-exp           # Expiration (MM/YY)
+    - cc-exp-month
+    - cc-exp-year
+    - cc-csc           # Security code
+    - cc-type          # Card type
+    - transaction-currency
+    - transaction-amount
+
+# Common Regex Patterns
+validation_patterns:
+  phone_us:
+    pattern: '^\+?1?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$'
+    example: "(555) 123-4567"
+    message: "Enter a valid US phone number"
+
+  phone_international:
+    pattern: '^\+?[1-9]\d{1,14}$'
+    example: "+44 20 7946 0958"
+    message: "Enter a valid international phone number"
+
+  zip_us:
+    pattern: '^\d{5}(-\d{4})?$'
+    example: "12345 or 12345-6789"
+    message: "Enter a valid ZIP code"
+
+  postal_canada:
+    pattern: '^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$'
+    example: "K1A 0B1"
+    message: "Enter a valid postal code"
+
+  password_strong:
+    pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+    example: "Password1!"
+    message: "Password must have uppercase, lowercase, number, and special character"
+
+  username:
+    pattern: '^[a-zA-Z][a-zA-Z0-9_-]{2,19}$'
+    example: "user_name123"
+    message: "3-20 characters, start with letter"
+
+  slug:
+    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+    example: "my-page-slug"
+    message: "Lowercase letters, numbers, and hyphens only"
+
+  hex_color:
+    pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$'
+    example: "#FF5733"
+    message: "Enter a valid hex color"
+
+  credit_card:
+    pattern: '^[0-9]{13,19}$'
+    example: "4111111111111111"
+    message: "Enter a valid card number"
+
+# Form Templates
+form_templates:
+  contact:
+    fields:
+      - name: name
+        type: text
+        label: "Full Name"
+        required: true
+        autocomplete: name
+      - name: email
+        type: email
+        label: "Email"
+        required: true
+        autocomplete: email
+      - name: subject
+        type: text
+        label: "Subject"
+        required: false
+      - name: message
+        type: textarea
+        label: "Message"
+        required: true
+        minlength: 10
+        maxlength: 1000
+
+  login:
+    fields:
+      - name: username
+        type: text
+        label: "Email or Username"
+        required: true
+        autocomplete: username
+        autofocus: true
+      - name: password
+        type: password
+        label: "Password"
+        required: true
+        autocomplete: current-password
+        minlength: 8
+      - name: remember
+        type: checkbox
+        label: "Remember me"
+        required: false
+
+  registration:
+    fields:
+      - name: email
+        type: email
+        label: "Email"
+        required: true
+        autocomplete: email
+      - name: password
+        type: password
+        label: "Password"
+        required: true
+        autocomplete: new-password
+        minlength: 8
+        pattern: password_strong
+      - name: password_confirm
+        type: password
+        label: "Confirm Password"
+        required: true
+        autocomplete: new-password
+      - name: given_name
+        type: text
+        label: "First Name"
+        required: true
+        autocomplete: given-name
+      - name: family_name
+        type: text
+        label: "Last Name"
+        required: true
+        autocomplete: family-name
+      - name: terms
+        type: checkbox
+        label: "I agree to the Terms of Service"
+        required: true
+
+  search:
+    fields:
+      - name: q
+        type: search
+        label: "Search"
+        required: false
+        autocomplete: off
+
+# Error Codes
+error_codes:
+  FORM001:
+    message: "Form missing accessible label"
+    severity: error
+    fix: "Add aria-labelledby or aria-label to form"
+  FORM002:
+    message: "Input element missing associated label"
+    severity: error
+    fix: "Add <label for='id'> element"
+  FORM003:
+    message: "Invalid regex pattern"
+    severity: error
+    fix: "Check pattern syntax"
+  FORM004:
+    message: "Required field missing indicator"
+    severity: warning
+    fix: "Add visual indicator and aria-required"
+  FORM005:
+    message: "No error message container"
+    severity: warning
+    fix: "Add element with aria-live for errors"
+  FORM006:
+    message: "Missing autocomplete attribute"
+    severity: warning
+    fix: "Add appropriate autocomplete value"
+  FORM007:
+    message: "Form has no action"
+    severity: warning
+    fix: "Add action attribute or handle with JavaScript"
+  FORM008:
+    message: "Fieldset without legend"
+    severity: error
+    fix: "Add legend element to fieldset"
+  FORM009:
+    message: "Radio/checkbox group not in fieldset"
+    severity: warning
+    fix: "Wrap group in fieldset with legend"
+  FORM010:
+    message: "Submit button missing"
+    severity: warning
+    fix: "Add submit button or handle submission"
+
+# ValidityState Properties
+validity_state:
+  valid:
+    description: "Element meets all constraints"
+  valueMissing:
+    description: "Required attribute set, value empty"
+    message_template: "{label} is required"
+  typeMismatch:
+    description: "Value doesn't match type (email, url)"
+    message_template: "Please enter a valid {type}"
+  patternMismatch:
+    description: "Value doesn't match pattern attribute"
+    message_template: "Please match the requested format"
+  tooLong:
+    description: "Value exceeds maxlength"
+    message_template: "Must be no more than {maxlength} characters"
+  tooShort:
+    description: "Value below minlength"
+    message_template: "Must be at least {minlength} characters"
+  rangeUnderflow:
+    description: "Value below min"
+    message_template: "Value must be at least {min}"
+  rangeOverflow:
+    description: "Value above max"
+    message_template: "Value must be no more than {max}"
+  stepMismatch:
+    description: "Value doesn't match step"
+    message_template: "Please select a valid value"
+  badInput:
+    description: "Browser can't convert input"
+    message_template: "Please enter a valid value"
+  customError:
+    description: "setCustomValidity() was called"
+    message_template: "Custom error message"
