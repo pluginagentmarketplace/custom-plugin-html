@@ -1,1 +1,235 @@
-elements: [div, span, p, a, img]
+# HTML Basics Skill Configuration
+# Version: 2.0.0 | SASMP: 1.3.0
+
+# Document Structure Elements
+document_elements:
+  root:
+    - html
+    - head
+    - body
+  metadata:
+    - title
+    - base
+    - link
+    - meta
+    - style
+  scripting:
+    - script
+    - noscript
+    - template
+
+# Text Content Elements
+text_elements:
+  headings:
+    - h1      # One per page (SEO best practice)
+    - h2
+    - h3
+    - h4
+    - h5
+    - h6
+  paragraph:
+    - p
+    - pre
+    - blockquote
+  inline:
+    - strong  # Strong importance
+    - em      # Stress emphasis
+    - mark    # Highlighted text
+    - small   # Side comments
+    - s       # No longer accurate
+    - cite    # Creative work title
+    - q       # Inline quotation
+    - code    # Code fragment
+    - kbd     # User input
+    - samp    # Sample output
+    - var     # Variable
+    - time    # Date/time
+    - abbr    # Abbreviation
+    - span    # Generic inline
+
+# Grouping Elements
+grouping_elements:
+  structural:
+    - div     # Generic container
+    - main    # Primary content (once per page)
+    - section # Thematic grouping
+    - article # Self-contained composition
+    - aside   # Tangential content
+    - header  # Introductory content
+    - footer  # Footer information
+    - nav     # Navigation section
+    - address # Contact information
+  lists:
+    - ul      # Unordered list
+    - ol      # Ordered list
+    - li      # List item
+    - dl      # Description list
+    - dt      # Description term
+    - dd      # Description details
+  figures:
+    - figure
+    - figcaption
+  others:
+    - hr      # Thematic break
+
+# Embedded Content Elements
+embedded_elements:
+  images:
+    - img
+    - picture
+    - source
+  media:
+    - video
+    - audio
+    - track
+  frames:
+    - iframe
+  objects:
+    - embed
+    - object
+    - param
+  canvas:
+    - canvas
+    - svg
+    - math
+
+# Interactive Elements
+interactive_elements:
+  links:
+    - a
+  buttons:
+    - button
+  disclosure:
+    - details
+    - summary
+  dialog:
+    - dialog
+
+# Required Attributes by Element
+required_attributes:
+  img:
+    - src
+    - alt
+  a:
+    - href
+  iframe:
+    - src
+    - title
+  video:
+    - controls    # Or provide custom controls
+  audio:
+    - controls
+  html:
+    - lang
+  meta_charset:
+    - charset
+
+# Recommended Attributes
+recommended_attributes:
+  img:
+    - width
+    - height
+    - loading     # lazy | eager
+    - decoding    # async | sync | auto
+  a:
+    - rel         # For external links: noopener
+  video:
+    - width
+    - height
+    - poster
+  html:
+    - dir         # ltr | rtl
+
+# Validation Rules
+validation:
+  max_nesting_depth: 6
+  require_doctype: true
+  require_lang: true
+  require_charset: true
+  require_viewport: true
+  single_h1: true
+  heading_order: strict  # No skipping levels
+
+# Nesting Rules (what can contain what)
+nesting_rules:
+  invalid_children:
+    p: [div, section, article, header, footer, main, nav, aside, p, h1, h2, h3, h4, h5, h6, ul, ol, table, form, fieldset, blockquote, pre, address, dl, figure, hr]
+    a: [a]  # Links cannot nest links
+    button: [button, a]
+  block_only:
+    - body
+    - main
+    - section
+    - article
+  inline_only:
+    - p
+    - h1
+    - h2
+    - h3
+    - h4
+    - h5
+    - h6
+
+# Default Templates
+templates:
+  html5_document: |
+    <!DOCTYPE html>
+    <html lang="{{lang}}">
+    <head>
+      <meta charset="{{charset}}">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{title}}</title>
+    </head>
+    <body>
+      {{content}}
+    </body>
+    </html>
+
+  responsive_image: |
+    <picture>
+      <source media="(min-width: 1200px)" srcset="{{large_src}}">
+      <source media="(min-width: 768px)" srcset="{{medium_src}}">
+      <img src="{{small_src}}" alt="{{alt}}" loading="lazy">
+    </picture>
+
+  video_player: |
+    <video controls width="{{width}}" height="{{height}}" poster="{{poster}}">
+      <source src="{{mp4_src}}" type="video/mp4">
+      <source src="{{webm_src}}" type="video/webm">
+      <p>Your browser doesn't support HTML5 video. <a href="{{mp4_src}}">Download</a></p>
+    </video>
+
+# Error Codes
+error_codes:
+  HB001:
+    message: "Missing DOCTYPE declaration"
+    severity: error
+    auto_fix: true
+  HB002:
+    message: "Missing lang attribute on html element"
+    severity: error
+    auto_fix: true
+  HB003:
+    message: "Missing charset meta tag"
+    severity: error
+    auto_fix: true
+  HB004:
+    message: "Missing alt attribute on img element"
+    severity: error
+    auto_fix: false
+  HB005:
+    message: "Empty heading element"
+    severity: warning
+    auto_fix: false
+  HB006:
+    message: "Invalid element nesting"
+    severity: error
+    auto_fix: false
+  HB007:
+    message: "Duplicate ID attribute"
+    severity: error
+    auto_fix: false
+  HB008:
+    message: "Skipped heading level"
+    severity: warning
+    auto_fix: false
