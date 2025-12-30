@@ -1,1 +1,476 @@
-elements: [div, span, p, a, img]
+# Accessibility Skill Configuration
+# Version: 2.0.0 | SASMP: 1.3.0
+# Based on WCAG 2.2 (Published Oct 2023, Updated Dec 2024)
+
+# WCAG 2.2 Success Criteria
+wcag_criteria:
+  level_a:
+    perceivable:
+      - id: "1.1.1"
+        name: "Non-text Content"
+        description: "All non-text content has text alternative"
+      - id: "1.2.1"
+        name: "Audio-only and Video-only"
+        description: "Alternatives for time-based media"
+      - id: "1.2.2"
+        name: "Captions (Prerecorded)"
+        description: "Captions for prerecorded audio"
+      - id: "1.2.3"
+        name: "Audio Description"
+        description: "Audio description for video"
+      - id: "1.3.1"
+        name: "Info and Relationships"
+        description: "Structure conveyed programmatically"
+      - id: "1.3.2"
+        name: "Meaningful Sequence"
+        description: "Correct reading sequence"
+      - id: "1.3.3"
+        name: "Sensory Characteristics"
+        description: "Not reliant on sensory alone"
+      - id: "1.4.1"
+        name: "Use of Color"
+        description: "Color not sole means of info"
+      - id: "1.4.2"
+        name: "Audio Control"
+        description: "Auto-playing audio controllable"
+    operable:
+      - id: "2.1.1"
+        name: "Keyboard"
+        description: "All functionality via keyboard"
+      - id: "2.1.2"
+        name: "No Keyboard Trap"
+        description: "Focus can move away"
+      - id: "2.1.4"
+        name: "Character Key Shortcuts"
+        description: "Shortcuts remappable or disableable"
+      - id: "2.2.1"
+        name: "Timing Adjustable"
+        description: "Time limits adjustable"
+      - id: "2.2.2"
+        name: "Pause, Stop, Hide"
+        description: "Moving content controllable"
+      - id: "2.3.1"
+        name: "Three Flashes"
+        description: "No content flashes >3/sec"
+      - id: "2.4.1"
+        name: "Bypass Blocks"
+        description: "Skip repetitive content"
+      - id: "2.4.2"
+        name: "Page Titled"
+        description: "Pages have descriptive titles"
+      - id: "2.4.3"
+        name: "Focus Order"
+        description: "Logical focus sequence"
+      - id: "2.4.4"
+        name: "Link Purpose (In Context)"
+        description: "Link purpose determinable"
+      - id: "2.5.1"
+        name: "Pointer Gestures"
+        description: "Simple pointer alternatives"
+      - id: "2.5.2"
+        name: "Pointer Cancellation"
+        description: "Actions reversible or abortable"
+      - id: "2.5.3"
+        name: "Label in Name"
+        description: "Visible label in accessible name"
+      - id: "2.5.4"
+        name: "Motion Actuation"
+        description: "Motion alternatives available"
+    understandable:
+      - id: "3.1.1"
+        name: "Language of Page"
+        description: "Page language identified"
+      - id: "3.2.1"
+        name: "On Focus"
+        description: "No context change on focus"
+      - id: "3.2.2"
+        name: "On Input"
+        description: "No unexpected context change"
+      - id: "3.3.1"
+        name: "Error Identification"
+        description: "Errors described in text"
+      - id: "3.3.2"
+        name: "Labels or Instructions"
+        description: "Input has labels/instructions"
+    robust:
+      - id: "4.1.1"
+        name: "Parsing"
+        description: "Valid HTML"
+      - id: "4.1.2"
+        name: "Name, Role, Value"
+        description: "Components have accessible name/role"
+
+  level_aa:
+    perceivable:
+      - id: "1.2.4"
+        name: "Captions (Live)"
+        description: "Captions for live audio"
+      - id: "1.2.5"
+        name: "Audio Description"
+        description: "Audio description for video"
+      - id: "1.3.4"
+        name: "Orientation"
+        description: "Not restricted to orientation"
+      - id: "1.3.5"
+        name: "Identify Input Purpose"
+        description: "Input purpose identifiable"
+      - id: "1.4.3"
+        name: "Contrast (Minimum)"
+        description: "4.5:1 text contrast"
+      - id: "1.4.4"
+        name: "Resize Text"
+        description: "Text resizable to 200%"
+      - id: "1.4.5"
+        name: "Images of Text"
+        description: "Text preferred over images of text"
+      - id: "1.4.10"
+        name: "Reflow"
+        description: "No horizontal scroll at 320px"
+      - id: "1.4.11"
+        name: "Non-text Contrast"
+        description: "3:1 UI component contrast"
+      - id: "1.4.12"
+        name: "Text Spacing"
+        description: "Content adjusts to text spacing"
+      - id: "1.4.13"
+        name: "Content on Hover or Focus"
+        description: "Additional content dismissable"
+    operable:
+      - id: "2.4.5"
+        name: "Multiple Ways"
+        description: "Multiple ways to find pages"
+      - id: "2.4.6"
+        name: "Headings and Labels"
+        description: "Descriptive headings/labels"
+      - id: "2.4.7"
+        name: "Focus Visible"
+        description: "Keyboard focus visible"
+      - id: "2.4.11"
+        name: "Focus Not Obscured (Minimum)"
+        description: "Focus not completely hidden"
+        wcag_version: "2.2"
+      - id: "2.5.7"
+        name: "Dragging Movements"
+        description: "Drag alternatives available"
+        wcag_version: "2.2"
+      - id: "2.5.8"
+        name: "Target Size (Minimum)"
+        description: "24x24px minimum targets"
+        wcag_version: "2.2"
+    understandable:
+      - id: "3.1.2"
+        name: "Language of Parts"
+        description: "Part language identified"
+      - id: "3.2.3"
+        name: "Consistent Navigation"
+        description: "Navigation consistent"
+      - id: "3.2.4"
+        name: "Consistent Identification"
+        description: "Components identified consistently"
+      - id: "3.2.6"
+        name: "Consistent Help"
+        description: "Help in same location"
+        wcag_version: "2.2"
+      - id: "3.3.3"
+        name: "Error Suggestion"
+        description: "Error corrections suggested"
+      - id: "3.3.4"
+        name: "Error Prevention (Legal)"
+        description: "Submissions reversible/checked"
+      - id: "3.3.7"
+        name: "Redundant Entry"
+        description: "Don't re-ask same info"
+        wcag_version: "2.2"
+      - id: "3.3.8"
+        name: "Accessible Authentication"
+        description: "No cognitive function tests"
+        wcag_version: "2.2"
+    robust:
+      - id: "4.1.3"
+        name: "Status Messages"
+        description: "Status conveyed via role"
+
+# ARIA Roles Reference
+aria_roles:
+  landmark:
+    - banner
+    - complementary
+    - contentinfo
+    - form
+    - main
+    - navigation
+    - region
+    - search
+  widget:
+    - alert
+    - alertdialog
+    - button
+    - checkbox
+    - dialog
+    - gridcell
+    - link
+    - log
+    - marquee
+    - menuitem
+    - menuitemcheckbox
+    - menuitemradio
+    - option
+    - progressbar
+    - radio
+    - scrollbar
+    - searchbox
+    - slider
+    - spinbutton
+    - status
+    - switch
+    - tab
+    - tabpanel
+    - textbox
+    - timer
+    - tooltip
+    - treeitem
+  composite:
+    - combobox
+    - grid
+    - listbox
+    - menu
+    - menubar
+    - radiogroup
+    - tablist
+    - tree
+    - treegrid
+  document_structure:
+    - application
+    - article
+    - cell
+    - columnheader
+    - definition
+    - directory
+    - document
+    - feed
+    - figure
+    - group
+    - heading
+    - img
+    - list
+    - listitem
+    - math
+    - none
+    - note
+    - presentation
+    - row
+    - rowgroup
+    - rowheader
+    - separator
+    - table
+    - term
+    - toolbar
+
+# ARIA States and Properties
+aria_attributes:
+  global:
+    - aria-atomic
+    - aria-busy
+    - aria-controls
+    - aria-current
+    - aria-describedby
+    - aria-details
+    - aria-disabled
+    - aria-dropeffect
+    - aria-errormessage
+    - aria-flowto
+    - aria-grabbed
+    - aria-haspopup
+    - aria-hidden
+    - aria-invalid
+    - aria-keyshortcuts
+    - aria-label
+    - aria-labelledby
+    - aria-live
+    - aria-owns
+    - aria-relevant
+    - aria-roledescription
+  widget:
+    - aria-autocomplete
+    - aria-checked
+    - aria-expanded
+    - aria-level
+    - aria-modal
+    - aria-multiline
+    - aria-multiselectable
+    - aria-orientation
+    - aria-placeholder
+    - aria-pressed
+    - aria-readonly
+    - aria-required
+    - aria-selected
+    - aria-sort
+    - aria-valuemax
+    - aria-valuemin
+    - aria-valuenow
+    - aria-valuetext
+
+# Color Contrast Requirements
+contrast_requirements:
+  text:
+    normal:
+      aa: 4.5
+      aaa: 7.0
+    large:  # 18pt+ or 14pt+ bold
+      aa: 3.0
+      aaa: 4.5
+  non_text:
+    aa: 3.0
+
+# Keyboard Patterns
+keyboard_patterns:
+  button:
+    enter: activate
+    space: activate
+  link:
+    enter: navigate
+  checkbox:
+    space: toggle
+  radio:
+    arrow: move_selection
+    space: select
+  tabs:
+    arrow: switch_tab
+    home: first_tab
+    end: last_tab
+  menu:
+    arrow: navigate
+    enter: select
+    escape: close
+    home: first_item
+    end: last_item
+  dialog:
+    escape: close
+    tab: cycle_focus
+  combobox:
+    arrow: navigate_options
+    enter: select
+    escape: close
+    alt_down: open
+  listbox:
+    arrow: navigate
+    home: first_item
+    end: last_item
+    type_ahead: jump_to_match
+
+# Screen Reader Compatibility
+screen_readers:
+  nvda:
+    platform: windows
+    browser_support: [chrome, firefox, edge]
+  jaws:
+    platform: windows
+    browser_support: [chrome, firefox, edge, ie11]
+  voiceover:
+    platform: [macos, ios]
+    browser_support: [safari, chrome]
+  talkback:
+    platform: android
+    browser_support: [chrome]
+  narrator:
+    platform: windows
+    browser_support: [edge]
+
+# Error Codes
+error_codes:
+  A11Y001:
+    message: "Missing alternative text for image"
+    wcag: "1.1.1"
+    impact: critical
+    fix: "Add descriptive alt attribute"
+  A11Y002:
+    message: "Insufficient color contrast"
+    wcag: "1.4.3"
+    impact: serious
+    fix: "Increase contrast to 4.5:1 minimum"
+  A11Y003:
+    message: "Form input missing label"
+    wcag: "1.3.1"
+    impact: critical
+    fix: "Add <label> element or aria-label"
+  A11Y004:
+    message: "Interactive element not keyboard accessible"
+    wcag: "2.1.1"
+    impact: critical
+    fix: "Add tabindex and keyboard handlers"
+  A11Y005:
+    message: "Missing skip navigation link"
+    wcag: "2.4.1"
+    impact: moderate
+    fix: "Add skip link to main content"
+  A11Y006:
+    message: "Empty link or button"
+    wcag: "2.4.4"
+    impact: critical
+    fix: "Add visible text or aria-label"
+  A11Y007:
+    message: "Missing or non-descriptive page title"
+    wcag: "2.4.2"
+    impact: serious
+    fix: "Add descriptive <title> element"
+  A11Y008:
+    message: "Missing language attribute"
+    wcag: "3.1.1"
+    impact: serious
+    fix: "Add lang attribute to <html>"
+  A11Y009:
+    message: "Focus indicator not visible"
+    wcag: "2.4.7"
+    impact: serious
+    fix: "Add visible focus styles"
+  A11Y010:
+    message: "Touch target too small"
+    wcag: "2.5.8"
+    impact: moderate
+    fix: "Increase to minimum 24x24 CSS pixels"
+  A11Y011:
+    message: "Heading levels skipped"
+    wcag: "1.3.1"
+    impact: moderate
+    fix: "Use sequential heading levels"
+  A11Y012:
+    message: "ARIA role invalid or misused"
+    wcag: "4.1.2"
+    impact: serious
+    fix: "Use correct ARIA role for component"
+  A11Y013:
+    message: "Live region not announcing"
+    wcag: "4.1.3"
+    impact: serious
+    fix: "Add aria-live attribute correctly"
+  A11Y014:
+    message: "Keyboard trap detected"
+    wcag: "2.1.2"
+    impact: critical
+    fix: "Ensure focus can leave component"
+  A11Y015:
+    message: "Auto-playing media without controls"
+    wcag: "1.4.2"
+    impact: serious
+    fix: "Add pause/stop controls or disable autoplay"
+
+# Testing Tools Integration
+testing_tools:
+  automated:
+    - name: axe-core
+      url: "https://github.com/dequelabs/axe-core"
+      type: library
+    - name: pa11y
+      url: "https://pa11y.org/"
+      type: cli
+    - name: WAVE
+      url: "https://wave.webaim.org/"
+      type: browser_extension
+    - name: Lighthouse
+      url: "https://developers.google.com/web/tools/lighthouse"
+      type: browser_devtools
+  manual:
+    - keyboard_navigation
+    - screen_reader_testing
+    - zoom_testing
+    - color_blindness_simulation

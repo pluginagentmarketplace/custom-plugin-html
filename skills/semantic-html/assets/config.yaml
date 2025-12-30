@@ -1,1 +1,249 @@
-elements: [div, span, p, a, img]
+# Semantic HTML Skill Configuration
+# Version: 2.0.0 | SASMP: 1.3.0
+
+# Semantic Elements by Category
+sectioning_elements:
+  root:
+    - article    # Self-contained, syndicated content
+    - section    # Thematic grouping with heading
+    - nav        # Navigation links
+    - aside      # Tangentially related content
+  landmarks:
+    - header     # Introductory content (banner if page-level)
+    - main       # Primary unique content (once per page)
+    - footer     # Footer information (contentinfo if page-level)
+
+# ARIA Landmark Role Mapping
+landmark_roles:
+  header:
+    implicit_role: banner
+    condition: "direct child of body"
+    explicit_allowed: true
+  nav:
+    implicit_role: navigation
+    condition: always
+    explicit_allowed: false  # Implicit is sufficient
+  main:
+    implicit_role: main
+    condition: always
+    explicit_allowed: false
+  aside:
+    implicit_role: complementary
+    condition: always
+    explicit_allowed: true
+  footer:
+    implicit_role: contentinfo
+    condition: "direct child of body"
+    explicit_allowed: true
+  section:
+    implicit_role: region
+    condition: "has accessible name (aria-label or aria-labelledby)"
+    explicit_allowed: true
+  article:
+    implicit_role: article
+    condition: always
+    explicit_allowed: false
+  form:
+    implicit_role: form
+    condition: "has accessible name"
+    explicit_allowed: true
+
+# Semantic Ratio Thresholds
+semantic_scoring:
+  excellent: 90
+  good: 70
+  moderate: 50
+  poor: 0
+
+  factors:
+    landmark_coverage:
+      weight: 0.25
+      required: [main]
+      recommended: [header, footer, nav]
+    heading_hierarchy:
+      weight: 0.25
+      rules:
+        - single_h1
+        - no_skipped_levels
+        - logical_nesting
+    semantic_ratio:
+      weight: 0.20
+      target: 0.7  # 70% semantic elements
+      calculation: "semantic / (semantic + div + span)"
+    accessible_names:
+      weight: 0.15
+      applies_to: [nav, section, aside, form]
+    article_structure:
+      weight: 0.15
+      requires: [heading, content]
+      optional: [header, footer, time, author]
+
+# Content Type Templates
+content_templates:
+  article:
+    required_elements:
+      - article
+      - "h1 | h2 | h3"  # At least one heading
+    recommended_elements:
+      - header
+      - footer
+      - time
+      - "a[rel=author]"
+    structure: |
+      <article>
+        <header>
+          <h1>{{title}}</h1>
+          <p>By <a rel="author" href="{{author_url}}">{{author}}</a></p>
+          <time datetime="{{iso_date}}">{{display_date}}</time>
+        </header>
+        {{content}}
+        <footer>
+          {{tags}}
+        </footer>
+      </article>
+
+  navigation:
+    required_elements:
+      - nav
+      - "ul | ol"
+    recommended_elements:
+      - aria-label
+    structure: |
+      <nav aria-label="{{nav_label}}">
+        <ul>
+          {{nav_items}}
+        </ul>
+      </nav>
+
+  breadcrumb:
+    required_elements:
+      - nav
+      - ol
+      - aria-label
+    structure: |
+      <nav aria-label="Breadcrumb">
+        <ol>
+          {{breadcrumb_items}}
+          <li><a href="{{current_url}}" aria-current="page">{{current_title}}</a></li>
+        </ol>
+      </nav>
+
+  sidebar:
+    required_elements:
+      - aside
+    recommended_elements:
+      - aria-label
+      - heading
+    structure: |
+      <aside aria-label="{{sidebar_label}}">
+        <h2>{{heading}}</h2>
+        {{content}}
+      </aside>
+
+  figure:
+    required_elements:
+      - figure
+      - img
+    recommended_elements:
+      - figcaption
+    structure: |
+      <figure>
+        <img src="{{src}}" alt="{{alt}}">
+        <figcaption>{{caption}}</figcaption>
+      </figure>
+
+# Anti-Pattern Detection
+anti_patterns:
+  div_soup:
+    description: "Excessive use of non-semantic divs"
+    detection: "div count > semantic count * 3"
+    severity: high
+
+  class_as_role:
+    description: "Using class names instead of semantic elements"
+    detection:
+      - ".header instead of <header>"
+      - ".nav instead of <nav>"
+      - ".main instead of <main>"
+      - ".footer instead of <footer>"
+      - ".sidebar instead of <aside>"
+      - ".article instead of <article>"
+    severity: medium
+
+  heading_abuse:
+    description: "Using headings for styling, not structure"
+    detection:
+      - "h1 used multiple times"
+      - "heading levels skipped"
+      - "headings outside sectioning content"
+    severity: high
+
+  table_layout:
+    description: "Using tables for layout instead of data"
+    detection: "table without th or proper structure"
+    severity: medium
+
+# Conversion Rules
+conversion_rules:
+  - pattern: '<div class="(header|site-header|page-header)">'
+    replacement: '<header>'
+    confidence: high
+
+  - pattern: '<div class="(nav|navigation|menu)">'
+    replacement: '<nav>'
+    confidence: high
+
+  - pattern: '<div class="(main|content|main-content)">'
+    replacement: '<main>'
+    confidence: high
+
+  - pattern: '<div class="(footer|site-footer|page-footer)">'
+    replacement: '<footer>'
+    confidence: high
+
+  - pattern: '<div class="(sidebar|aside|complementary)">'
+    replacement: '<aside>'
+    confidence: high
+
+  - pattern: '<div class="(article|post|entry|blog-post)">'
+    replacement: '<article>'
+    confidence: medium
+
+  - pattern: '<div class="(section|block)">'
+    replacement: '<section>'
+    confidence: low  # Needs heading check
+
+# Error Codes
+error_codes:
+  SH001:
+    message: "Missing document outline - no proper heading hierarchy"
+    severity: error
+    suggestion: "Add h1-h6 headings in logical order"
+  SH002:
+    message: "No main landmark found"
+    severity: error
+    suggestion: "Wrap primary content in <main>"
+  SH003:
+    message: "Multiple main elements detected"
+    severity: error
+    suggestion: "Use only one <main> per page"
+  SH004:
+    message: "Section without accessible name or heading"
+    severity: warning
+    suggestion: "Add heading or aria-labelledby to section"
+  SH005:
+    message: "Article without heading"
+    severity: warning
+    suggestion: "Add h1-h6 as first child of article"
+  SH006:
+    message: "Multiple nav elements without unique labels"
+    severity: warning
+    suggestion: "Add unique aria-label to each nav"
+  SH007:
+    message: "Div soup detected - low semantic ratio"
+    severity: warning
+    suggestion: "Replace divs with semantic elements"
+  SH008:
+    message: "Header/footer nested in main"
+    severity: info
+    suggestion: "Page-level header/footer should be outside main"
