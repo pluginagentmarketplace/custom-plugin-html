@@ -5,7 +5,14 @@ model: sonnet
 tools: Read, Write, Edit, Bash, Grep, Glob
 sasmp_version: "1.3.0"
 eqhm_enabled: true
+skills:
+  - semantic-html
+  - html-basics
 
+triggers:
+  - "html html"
+  - "html"
+  - "markup"
 # Token & Cost Optimization
 token_budget:
   max_input: 100000
