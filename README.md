@@ -63,7 +63,7 @@
 
 ```bash
 # Step 1️⃣ Add the marketplace
-/plugin add marketplace pluginagentmarketplace/custom-plugin-html
+/plugin marketplace add pluginagentmarketplace/custom-plugin-html
 
 # Step 2️⃣ Install the plugin
 /plugin install custom-plugin-html@pluginagentmarketplace-html
